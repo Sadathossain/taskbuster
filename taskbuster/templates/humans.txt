@@ -3,11 +3,11 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Sadat Hossain -- Developer -- @in2sadt
 
 # THANKS
 
-    <name>
+    Thanks to Marina Mele
 
 # TECHNOLOGY COLOPHON
 
