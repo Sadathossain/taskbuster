@@ -1,10 +1,29 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from django.core.urlresolvers import reverse
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase  
 from django.utils.translation import activate
 from datetime import date
 from django.utils import formats
+
+caps = DesiredCapabilities.FIREFOX
+# Tell the Python bindings to use Marionette.
+# This will not be necessary in the future,
+# when Selenium will auto-detect what remote end
+# it is talking to.
+caps["marionette"] = True
+
+# Path to Firefox DevEdition or Nightly.
+# Firefox 47 (stable) is currently not supported,
+# and may give you a suboptimal experience.
+#
+# On Mac OS you must point to the binary executable
+# inside the application package, such as
+# /Applications/FirefoxNightly.app/Contents/MacOS/firefox-bin
+caps["binary"] = "/usr/bin/firefox"
+
+driver = webdriver.Firefox(capabilities=caps)
  
  
 class HomeNewVisitorTest(StaticLiveServerTestCase): 
@@ -27,8 +46,7 @@ class HomeNewVisitorTest(StaticLiveServerTestCase):
     def test_h1_css(self):
         self.browser.get(self.get_full_url("home"))
         h1 = self.browser.find_element_by_tag_name("h1")
-        self.assertEqual(h1.value_of_css_property("color"), 
-                         "rgba(200, 50, 255, 1)")
+        self.assertEqual(h1.value_of_css_property("color"), "rgb(200, 50, 255)")
 
     def test_home_files(self):
         self.browser.get(self.live_server_url + "/robots.txt")
