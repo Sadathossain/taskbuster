@@ -23,13 +23,13 @@ caps["marionette"] = True
 # /Applications/FirefoxNightly.app/Contents/MacOS/firefox-bin
 caps["binary"] = "/usr/bin/firefox"
 
-driver = webdriver.Firefox(capabilities=caps)
+
  
  
 class HomeNewVisitorTest(StaticLiveServerTestCase): 
  
     def setUp(self):
-        self.browser = webdriver.Firefox()
+        self.browser = webdriver.Firefox(capabilities=caps)
         self.browser.implicitly_wait(3)
         activate('en')
  
